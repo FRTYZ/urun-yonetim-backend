@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 
 import dotenv from "dotenv";
 
@@ -14,6 +14,12 @@ app.use(express.urlencoded({ extended: false }));
 
 // Helpers
 const connectDB = require('./helpers/database');
+
+// Routes
+const productRoutes = require('./routes/product');
+
+app.use('/product', productRoutes);
+
 const startUp = async () => {
 
     app.listen(PORT, () => {

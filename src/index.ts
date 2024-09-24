@@ -15,10 +15,14 @@ app.use(express.urlencoded({ extended: false }));
 // Helpers
 const connectDB = require('./helpers/database');
 
+// Middlewares
+const errorHandler = require('./middleware/errorHandler');
+
 // Routes
 const productRoutes = require('./routes/product');
 
 app.use('/product', productRoutes);
+app.use(errorHandler);
 
 const startUp = async () => {
 

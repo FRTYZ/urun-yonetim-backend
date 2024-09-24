@@ -62,7 +62,6 @@ exports.postProduct = async function (req: Request, res: Response, next: NextFun
     }
 }
 
-
 exports.putProduct = async function (req: Request, res: Response, next: NextFunction) {
 
     try {
@@ -104,6 +103,44 @@ exports.putProduct = async function (req: Request, res: Response, next: NextFunc
         );
 
         if (!updatedUser) {
+            throw new CustomError(500, "Server error. Please try again.");
+        }
+
+        return res.status(200).json({ sucess: true })
+
+    }catch (err){
+        next(err)
+    }
+}
+
+exports.deleteProduct = async function (req: Request, res: Response, next: NextFunction) {
+
+    try {
+        const {product_id} =  req.params;
+
+        if(!product_id || product_id == ''){
+            throw new CustomError(403, "You need to specify the product_id field.");
+        }
+
+        const isValidId = Types.ObjectId.isValid(product_id);
+
+        if (!isValidId) {
+            throw new CustomError(400, "Invalid ID format.");
+        }
+
+        const values = await Products.findById(product_id);
+
+        if(!values){
+            throw new CustomError(404, "No data found.");
+        }
+
+        if(values?.featuredImage){
+            await File.deleteFile(values?.featuredImage.pathName)
+        }
+
+        const deleteProduct = await Products.findByIdAndDelete(product_id);
+
+        if (!deleteProduct) {
             throw new CustomError(500, "Server error. Please try again.");
         }
 

@@ -12,9 +12,12 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Helpers
+const connectDB = require('./helpers/database');
 const startUp = async () => {
 
     app.listen(PORT, () => {
+        connectDB();
         console.log('Server is running at ' + PORT);
     })
 }

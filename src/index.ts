@@ -10,15 +10,23 @@ const app: Express = express();
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use('/static', express.static(path.join(__dirname, '../public')))
-
 // Helpers
 const connectDB = require('./helpers/database');
 
+// Cors
+import cors from 'cors';
+const corsOptions = require("./config/corsOptions");
+
 // Middlewares
 const errorHandler = require('./middleware/errorHandler');
+const credentials = require('./middleware/credentials');
+
+app.use(credentials);
+app.use(cors(corsOptions));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use('/static', express.static(path.join(__dirname, '../public')))
 
 // Routes
 const productRoutes = require('./routes/product');

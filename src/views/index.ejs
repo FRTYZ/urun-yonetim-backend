@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        body {
+            margin: 0;
+        }
+        
+        header {
+            display: flex; 
+            padding-top: 2rem;
+            padding-bottom: 2rem; 
+            justify-content: space-between; 
+            align-items: center; 
+            background-color:#f1f1f1; 
+            justify-content: center;
+        }
+
+        .logoSection {
+            display: flex;
+            align-items: center; 
+            gap: 1rem; 
+        }
+
+        .logoA {
+            border-right: 1px solid gray;
+            padding-right: 1.5rem; 
+        }
+
+        .logo {
+            width: 100%; 
+            height: 1.5rem; 
+        }
+
+        .logoText {
+            font-size: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logoSection">
+            <a href="/" class='logoA'>
+              <img 
+                src='https://cdn.muhiku.com/wp-content/uploads/2024/02/muhiku-logo-1_1x.webp?x47379'
+                class='logo'
+              />
+            </a>
+            <p class='logoText'>Case Study - Backend</p>
+        </div>
+    </header>
+</body>
+</html>

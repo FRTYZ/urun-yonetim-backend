@@ -26,11 +26,16 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.set("view engine","ejs");
+app.set('views','./src/views');
 app.use('/static', express.static(path.join(__dirname, '../public')))
 
 // Routes
+const homeRoutes = require('./routes/home')
 const productRoutes = require('./routes/product');
 
+app.use(homeRoutes);
 app.use('/product', productRoutes);
 app.use(errorHandler);
 

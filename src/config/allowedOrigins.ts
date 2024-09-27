@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'https://www.yoursite.com',
+    'https://urun-yonetim-web.vercel.app',
     'http://localhost:5173',
     'http://localhost:8080'
 ];

@@ -13,13 +13,36 @@ const { Types } = require('mongoose');
 
 exports.getProduct = async function (req: Request, res: Response, next: NextFunction) {
     try {
-        const values = await Products.find({});
+        const { has_stock, min_price, max_price } = req.query;
 
-        return res.status(200).json(values);
-    }catch (err){
-        next(err)
+        let filter: any = {};
+
+        if (has_stock !== undefined) {
+            if (has_stock === 'in-stock') {
+                filter.stock = { $gt: 0 };
+            } else if (has_stock === 'out-stock') {
+                filter.stock = 0;
+            }
+        }
+
+        if (min_price !== undefined || max_price !== undefined) {
+            filter.price = {};
+            if (min_price !== undefined) {
+                filter.price.$gte = Number(min_price); // min_price varsa en az bu fiyattan büyük ürünler
+            }
+            if (max_price !== undefined) {
+                filter.price.$lte = Number(max_price); // max_price varsa en fazla bu fiyattan küçük ürünler
+            }
+        }
+
+        const products = await Products.find(filter);
+
+        return res.status(200).json(products);
+    } catch (err) {
+        next(err);
     }
-}
+};
+
 
 exports.postProduct = async function (req: Request, res: Response, next: NextFunction) {
     

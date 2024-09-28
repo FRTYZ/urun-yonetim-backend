@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-// Create a Applications Schema
+// Products modeli oluşturuldu
 const productsSchema = new Schema({
   name: {
     type: String,

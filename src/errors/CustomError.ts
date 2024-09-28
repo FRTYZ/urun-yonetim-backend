@@ -1,3 +1,8 @@
+/*
+  Özel error classımız,
+  Bu CustomError kullanarak işlemlerimizde error göndereme işlevini görür
+*/
+
 class CustomError extends Error {
     statusCode: number;
     type: string;

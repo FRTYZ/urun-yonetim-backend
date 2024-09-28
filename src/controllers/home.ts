@@ -6,7 +6,6 @@ exports.getHome = async function (req: Request, res: Response, next: NextFunctio
             title : "MUHİKU - Ürün Yönetim Sistemi Case Study | Fırat Yıldız",
         }) 
     } catch (err) {
-        console.log(err)
         next(err);
     }
 };

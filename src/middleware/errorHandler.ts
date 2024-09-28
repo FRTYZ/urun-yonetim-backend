@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
+// Hatalarımı yönettiğimiz fonksiyon, kullanıcının karşısına okunaklı hatayı göndermeye yarıyor
 const errorHandler = (err: any, req: Response, res: Response, next: NextFunction) => {
     
     if(err.type && err.message){

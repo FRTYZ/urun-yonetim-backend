@@ -15,6 +15,7 @@ exports.getProduct = async function (req: Request, res: Response, next: NextFunc
     try {
         const { has_stock, min_price, max_price } = req.query;
 
+        // Filtrelerimiz
         let filter: any = {};
 
         if (has_stock !== undefined) {
@@ -27,11 +28,12 @@ exports.getProduct = async function (req: Request, res: Response, next: NextFunc
 
         if (min_price !== undefined || max_price !== undefined) {
             filter.price = {};
+
             if (min_price !== undefined) {
-                filter.price.$gte = Number(min_price); // min_price varsa en az bu fiyattan büyük ürünler
+                filter.price.$gte = Number(min_price);
             }
             if (max_price !== undefined) {
-                filter.price.$lte = Number(max_price); // max_price varsa en fazla bu fiyattan küçük ürünler
+                filter.price.$lte = Number(max_price);
             }
         }
 
@@ -96,6 +98,7 @@ exports.putProduct = async function (req: Request, res: Response, next: NextFunc
             throw new CustomError(403, "You need to specify the product_id field.");
         }
 
+        // Gönderilen param id'nin uygun formatını kontrol ederek
         const isValidId = Types.ObjectId.isValid(product_id);
 
         if (!isValidId) {
@@ -145,6 +148,7 @@ exports.deleteProduct = async function (req: Request, res: Response, next: NextF
             throw new CustomError(403, "You need to specify the product_id field.");
         }
 
+        // Gönderilen param id'nin uygun formatını kontrol ederek
         const isValidId = Types.ObjectId.isValid(product_id);
 
         if (!isValidId) {

@@ -4,9 +4,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Create an Express application
 const app: Express = express();
-// Set the port number for the server
+
 const PORT = process.env.PORT || 8080;
 const path = require("path");
 
@@ -21,12 +20,15 @@ const corsOptions = require("./config/corsOptions");
 const errorHandler = require('./middleware/errorHandler');
 const credentials = require('./middleware/credentials');
 
+// Cors ayarlarımız
 app.use(credentials);
 app.use(cors(corsOptions));
 
+// JSON olarak formdan veri almayı sağlar
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Template engine ayarları
 app.set("view engine","ejs");
 app.set('views','./src/views');
 app.use('/static', express.static(path.join(__dirname, '../public')))
@@ -40,7 +42,7 @@ app.use('/product', productRoutes);
 app.use(errorHandler);
 
 const startUp = async () => {
-
+    
     app.listen(PORT, () => {
         connectDB();
         console.log('Server is running at ' + PORT);

@@ -1,5 +1,8 @@
 const allowedOrigins: string[] = require('../config/allowedOrigins');
 
+/*
+    Cors opsiyonları belirlediğimiz obje
+*/
 const corsOptions = {
     origin: (origin: string, callback: any) => {
         if (allowedOrigins.indexOf(origin) !== -1 || origin !== '') {
